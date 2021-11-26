@@ -1,0 +1,156 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/*=========== NAV BAR =============*/
+nav{
+  height: 45px;
+  background: black;
+  color: white;
+  display: flex!important;
+  justify-content: space-between;
+
+}
+
+nav .mainMenu {
+  display: flex;
+  list-style: none;
+}
+nav .mainMenu li a{
+  display: inline-block;
+  padding: 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  font-size: 15px;
+}
+nav .mainMenu li a:hover{
+  background: #8CA4F0;
+}
+nav .openMenu{
+  font-size: 15px;
+  margin: 10px;
+  display: none;
+  cursor: pointer;
+}
+nav .mainMenu .closeMenu, .icons i{
+  font-size: 25px;
+  display: none;
+  cursor: pointer;
+}
+.fa-facebook:hover{ padding: 10px; background: white; border-radius: 50%; color: #8CA4F0; font-size: 25px;}
+.fa-instagram:hover{ padding: 10px; background: white; border-radius: 50%; color: #8CA4F0; font-size: 25px;}
+.fa-twitter:hover{ padding: 10px; background: white; border-radius: 50%; color: #8CA4F0; font-size: 25px;}
+.fa-github:hover{ padding: 10px; background: white; border-radius: 50%; color: #8CA4F0; font-size: 25px; }
+.fa-bars{ font-size: 25px;}
+nav .logo h1{
+  margin: 6px;
+  font-size: 25px;
+  cursor: pointer;
+}
+@media(max-width: 800px){
+  nav .mainMenu{
+    height: 100vh;
+    position: fixed;
+    top: -100%;
+    right: 0;
+    left: -5%;
+    z-index: 10;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    transition: 1s;
+    display: flex;
+  }
+  nav .mainMenu .closeMenu{
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  nav .openMenu{
+    display: block;
+  }
+  nav .mainMenu li a{
+  font-size: 25px;
+}
+  nav .mainMenu li a:hover{
+    background: none;
+    color:#8CA4F0;
+    font-size: 25px;
+  }
+  .icons i{
+    display: inline-block;
+    padding: 12px;
+  }
+}
+
+/*=========== FILTROS =============*/
+input[type="radio"]{
+  display: none;
+}
+label{
+  cursor:pointer;
+  color:blue;
+  text-decoration:underline;
+}
+input[type="radio"]:checked + label{
+color: darkblue;
+}
+
+/*=========== FORM =============*/
+.prod_list{
+  width: 100%!important;
+  height: 400px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+.btn_cargar{
+  width: 100%!important;
+  background: #76D165!important;
+  border-radius: 5px!important;
+  color: white!important;
+}
+.btn_cargar:hover{
+  background: #539547!important;
+}
+.btn_cancelar{
+  width: 100%!important;
+  background: #F26969!important;
+  border-radius: 5px!important;
+  color: white!important;
+}
+.btn_cancelar:hover{
+  background: #A84B4B!important;
+}
+.btn_edit{
+  width: 100%!important;
+  background: #76D165!important;
+  border-radius: 5px!important;
+  color: white!important;
+}
+.btn_edit:hover{
+  background: #539547!important;
+}
+
+.btn_del{
+  width: 100%!important;
+  background: #F26969!important;
+  border-radius: 5px!important;
+  color: white!important;
+}
+.btn_del:hover{
+  background: #A84B4B!important;
+}
+.container-fluid h2{
+  background: #8CA4F0;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+.card{
+  text-align: center;
+}
