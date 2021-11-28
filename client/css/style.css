@@ -6,27 +6,38 @@
 /*=========== NAV BAR =============*/
 nav{
   height: 45px;
-  background: black;
+  background: #313131;
   color: white;
   display: flex!important;
   justify-content: space-between;
 
 }
 
-nav .mainMenu {
+nav .mainMenu .nav_radios {
   display: flex;
   list-style: none;
 }
-nav .mainMenu li a{
+nav .mainMenu .nav_radios li a{
   display: inline-block;
-  padding: 15px;
+  padding: 12px 5px;
   text-decoration: none;
   text-transform: uppercase;
-  color: white;
+  color: #CBCBCB;
   font-size: 15px;
 }
-nav .mainMenu li a:hover{
-  background: #8CA4F0;
+nav .mainMenu .nav_radios li a:hover{
+  color: white;
+}
+nav .mainMenu .nav_radios .target a{
+  color: white;
+}
+.nav_radios input[type="radio"]{
+  display: none;
+}
+
+.nav_radios input[type="radio"]:checked + label{
+background-color: #8CA4F0;
+padding: 0 10px;
 }
 nav .openMenu{
   font-size: 15px;
@@ -100,7 +111,27 @@ input[type="radio"]:checked + label{
 color: darkblue;
 }
 
-/*=========== FORM =============*/
+/*=========== ADMIN FORMS AND TABLES =============*/
+.admin_content{
+  background: #DEDEDE!important;
+}
+.admin_content h2{
+  margin: 0 -16px;
+  padding: 5px;
+  background: #313131;
+  color: white;
+}
+.admin_content input[type="text"], .admin_content select, .admin_content input[type="file"]{
+  background-color: #F2F2F2!important;
+}
+.admin_content table th{
+  background-color: #313131!important;
+  color: white;
+}
+.admin_content table td{
+  background-color: #F2F2F2!important;
+  border-bottom: 1px solid #313131;
+}
 .prod_list{
   width: 100%!important;
   height: 400px;
@@ -108,48 +139,49 @@ color: darkblue;
   overflow-y: scroll;
 }
 .btn_cargar{
-  width: 100%!important;
-  background: #76D165!important;
+  width: 60%!important;
+  background: #313131!important;
   border-radius: 5px!important;
   color: white!important;
+  transition: 0.6s!important;
 }
 .btn_cargar:hover{
-  background: #539547!important;
+  background: #8CA4F0!important;
+  width: 100%!important;
 }
 .btn_cancelar{
-  width: 100%!important;
-  background: #F26969!important;
+  width: 60%!important;
+  background: #313131!important;
   border-radius: 5px!important;
   color: white!important;
+  transition: 0.6s!important;
 }
 .btn_cancelar:hover{
   background: #A84B4B!important;
+  width: 100%!important;
 }
 .btn_edit{
-  width: 100%!important;
-  background: #76D165!important;
+  width: 60%!important;
+  background: #313131!important;
   border-radius: 5px!important;
   color: white!important;
+  transition: 0.6s!important;
 }
 .btn_edit:hover{
-  background: #539547!important;
+  background: #8CA4F0!important;
+  width: 100%!important;
 }
 
 .btn_del{
-  width: 100%!important;
-  background: #F26969!important;
+  width: 60%!important;
+  background: #313131!important;
   border-radius: 5px!important;
   color: white!important;
+  transition: 0.6s!important;
 }
 .btn_del:hover{
-  background: #A84B4B!important;
-}
-.container-fluid h2{
-  background: #8CA4F0;
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  margin-top: 20px;
+  background: #F26969!important;
+   width: 100%!important;
 }
 .card{
   text-align: center;

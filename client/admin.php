@@ -12,17 +12,15 @@
   </head>
   <body>
     <?php include 'navbar.php' ?>
-    <div class="container-fluid">   
-      <div class="container card mt-4">
+    <div class="row m-auto">
+      <div class="col-12 col-lg-3"></div>
+      <div class="container card admin_content mt-4 col-12 col-lg-8">
         <h2>Añadir producto</h2>
         <div class="add_prod mt-4 mb-4">
           <form>
             <div class="row">
                 <div class="col-12">
-                  <input type="text" class="form-control" id="id_prod" name="id_prod" readonly="readonly" placeholder="id...">
-                </div>
-                <div class="col-12">
-                  <br>
+                  <input type="text" class="form-control" id="id_prod" name="id_prod" readonly="readonly" placeholder="id..." hidden="true">
                 </div>
                 <div class="col-6">
                   <input type="text" class="form-control nombre_prod" name="nombre_prod" placeholder="nombre...">
@@ -65,16 +63,14 @@
                 <div class="col-12">
                   <br>
                 </div>
-                <div class="upload_buttons button-row d-flex">
-                  <div class="col-12">
+                <div class="upload_buttons button-row justify-content-end d-flex">
+                  <div class="col-6">
                     <button type="submit" formaction="prod_upload.php" class="btn btn_cargar">Añadir</button>
                   </div>
                 </div>                
             </div>
           </form>
         </div>
-      </div>
-      <div class="container card mt-4">
         <h2>Modificar producto</h2>  
           <div class="row mb-2">
             <div class="col-3">Area:</div>
