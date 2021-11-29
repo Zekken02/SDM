@@ -11,6 +11,7 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
   </head>
   <body>
+    <?php $target_radio = 2 ?>
     <?php include 'navbar.php' ?>
     <div id="filtros" class="filtros">
       <!--========== INPUTS PARA AREA DE PRODUCTO ============-->

@@ -1,3 +1,8 @@
+// declaracion de variables:
+//paginador
+var desde = 0;
+var hasta = 20;
+
 // llamamos al select con la clase "filter_area" y tomamos su valor
 filter_area = document.querySelector(".filter_area");
 area = document.querySelector(".filter_area").value;
@@ -79,7 +84,7 @@ function id_prod_change(){
           div_del_upload.className = "col-6";
           const btn_del_upload = document.createElement("button");
           btn_del_upload.type = "submit";
-          btn_del_upload.className = "btn btn_cancelar";
+          btn_del_upload.className = "btn btn_red";
           btn_del_upload.innerText = "Cancelar"
 
           const div_edit_upload = document.createElement("div");
@@ -87,7 +92,7 @@ function id_prod_change(){
           const btn_edit_upload = document.createElement("button");
           btn_edit_upload.type = "submit";
           btn_edit_upload.formAction = "prod_edit.php";
-          btn_edit_upload.className = "btn btn_cargar";
+          btn_edit_upload.className = "btn btn_blue";
           btn_edit_upload.innerText = "Editar"
 
           div_del_upload.appendChild(btn_del_upload);
@@ -219,29 +224,42 @@ function lista_productos() {
                  divDatos.appendChild(fila_nr);
                  console.log(non_result);
                }else{
+
+              const thead = document.createElement("thead");
               const fila = document.createElement("tr");
               const id = document.createElement("th");
               id.innerText = "ID";
+              id.scope = "col";
               const nombre = document.createElement("th");
               nombre.innerText = "Nombre";
+              nombre.scope = "col";
               const descripcion = document.createElement("th");
               descripcion.innerText = "Descripcion";
+              descripcion.scope = "col";
               const foto = document.createElement("th");
               foto.innerText = "Foto";
+              foto.scope = "col";
               const precio = document.createElement("th");
               precio.innerText = "Precio";
+              precio.scope = "col"
               const stock = document.createElement("th");
               stock.innerText = "Stock";
+              stock.scope = "col";
               const n_area = document.createElement("th");
               n_area.innerText = "Area";
+              n_area.scope = "col";
               const tipo = document.createElement("th");
               tipo.innerText = "categoria";
+              tipo.scope = "col";
               const n_marca = document.createElement("th");
               n_marca.innerText = "Marca";
+              n_marca.scope = "col";
               const editar = document.createElement("th");
               editar.innerText = "Modificar";
+              editar.scope = "col";
               const eliminar = document.createElement("th");
               eliminar.innerText = "Eliminar";
+              eliminar.scope = "col";
 
               fila.appendChild(id);
               fila.appendChild(nombre);
@@ -255,13 +273,67 @@ function lista_productos() {
               fila.appendChild(editar);
               fila.appendChild(eliminar);
 
-              divDatos.appendChild(fila);
+              thead.appendChild(fila);
+              divDatos.appendChild(thead);
               }
 
-              data.map((producto => {
+              console.log(desde);
+
+                if (desde != 0) {
+                btn_back_next = document.getElementById("btn_back_next");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                divBack = document.createElement("div");
+                divBack.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.className = "btn btn_blue";
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnBack = document.createElement("button");
+                btnBack.className = "btn btn_blue";
+                btnBack.innerHTML = '<i class="fa-solid fa-angles-left"></i>';
+
+                divBack.appendChild(btnBack);
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divBack)
+                btn_back_next.appendChild(divNext)
+              }else{
+                btn_back_next = document.getElementById("btn_back_next");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnNext.className = "btn btn_blue";
+
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divNext)
+              }
+
+              btnNext.addEventListener('click', function(){
+                  desde += 20;
+                  hasta += 20;
+                  lista_productos()
+              })
+
+              if (desde!=0) {
+                btnBack.addEventListener('click', function(){
+                  desde -= 20;
+                  hasta -= 20;
+                  lista_productos()
+                })
+              }
+
+              const tbody = document.createElement("tbody");
+
+              data.map(((producto, index) => {
+
+              if (index>=desde & index<hasta) {
+
               const fila = document.createElement("tr");
-              const id = document.createElement("td");
+              const id = document.createElement("th");
               id.innerText = producto.id;
+              id.scope = "row";
               const nombre = document.createElement("td");
               nombre.innerText = producto.nombre;
               const descripcion = document.createElement("td");
@@ -281,9 +353,9 @@ function lista_productos() {
               const n_marca = document.createElement("td");
               n_marca.innerText = producto.n_marca;
               const editar = document.createElement("td");
-              editar.innerHTML = '<button class="btn btn_edit" id="edit'+ producto.id + '" name"edit"><i class="fa-solid fa-pen"></i></button>';
-              const eliminar = document.createElement("th");
-              eliminar.innerHTML = '<button class="btn btn_del" id="delete'+ producto.id + '" name"delete"><i class="fa-solid fa-trash-can"></i></button>';
+              editar.innerHTML = '<button class="btn btn_blue" id="edit'+ producto.id + '" name"edit"><i class="fa-solid fa-pen"></i></button>';
+              const eliminar = document.createElement("td");
+              eliminar.innerHTML = '<button class="btn btn_red" id="delete'+ producto.id + '" name"delete"><i class="fa-solid fa-trash-can"></i></button>';
 
 
               fila.appendChild(id);
@@ -298,13 +370,24 @@ function lista_productos() {
               fila.appendChild(editar);
               fila.appendChild(eliminar);
 
-              divDatos.appendChild(fila);
+              tbody.appendChild(fila)
+              divDatos.appendChild(tbody);
 
               btnEdit = document.getElementById("edit" + producto.id)
 
               btnEdit.addEventListener('click', function(){
-                id_prod_bar.value = producto.id
-                id_prod_change()
+                function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("prod_upl_edit")));
+                id_prod_bar.value = producto.id;
+                id_prod_change();
               })
 
               btnDelete = document.getElementById("delete" + producto.id)
@@ -314,13 +397,14 @@ function lista_productos() {
                 para.append("id", producto.id);
                 location.href = "prod_delete.php?" + para.toString();
               })
-
+              }
               }))
             });
         };
+
       document.addEventListener("DOMContentLoaded", function (event) {
         filtros_areas()
         filtros_categorias()
         filtros_marcas()
-        lista_productos()       
+        lista_productos() 
       });

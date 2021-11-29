@@ -112,77 +112,95 @@ color: darkblue;
 }
 
 /*=========== ADMIN FORMS AND TABLES =============*/
-.admin_content{
+.admin_content, .indice_content{
   background: #DEDEDE!important;
+  text-align: center;
 }
-.admin_content h2{
+.indice_content{
+  height: 100%;
+}
+.admin_content h2, .indice_content h2{
   margin: 0 -16px;
   padding: 5px;
   background: #313131;
   color: white;
 }
+.admin_content label, .indice_content label{
+  color: black;
+  font-weight: bolder;
+  text-decoration: none;
+}
 .admin_content input[type="text"], .admin_content select, .admin_content input[type="file"]{
   background-color: #F2F2F2!important;
 }
-.admin_content table th{
+/*.admin_content table th{
   background-color: #313131!important;
   color: white;
 }
 .admin_content table td{
   background-color: #F2F2F2!important;
   border-bottom: 1px solid #313131;
-}
+}*/
 .prod_list{
   width: 100%!important;
   height: 400px;
   overflow-x: scroll;
   overflow-y: scroll;
 }
-.btn_cargar{
+.btn_indiceCategoria{
+  margin: 0 -16px;
+  padding: 5px;
+  background: #ABAAAA!important;
+  font-size: 25px!important;
+  border-radius: 0!important;
+  transition: 0.6s!important;
+}
+.btn_indiceCategoria:hover{
+  background: #878787!important;
+}
+.btn_indiceSubCategoria{
+  display: none!important;
+  margin: 0 -16px;
+  padding: 5px;
+  border-radius: 0!important;
+  transition: 0.6s!important;
+}
+.btn_indiceSubCategoria:hover{
+  /*background: #8CA4F0!important;*/
+  border-left: solid #8CA4F0 10px;
+}
+.show{
+  display: block!important;
+}
+.btn_blue{
   width: 60%!important;
   background: #313131!important;
   border-radius: 5px!important;
   color: white!important;
   transition: 0.6s!important;
 }
-.btn_cargar:hover{
+.btn_blue:hover{
   background: #8CA4F0!important;
   width: 100%!important;
 }
-.btn_cancelar{
+.btn_red{
   width: 60%!important;
   background: #313131!important;
   border-radius: 5px!important;
   color: white!important;
   transition: 0.6s!important;
 }
-.btn_cancelar:hover{
-  background: #A84B4B!important;
+.btn_red:hover{
+  background: #DA4545!important;
   width: 100%!important;
 }
-.btn_edit{
+/*.btn_locked{
   width: 60%!important;
-  background: #313131!important;
+  color: darkgray!important;
+  border: solid 2px darkgray!important;
   border-radius: 5px!important;
-  color: white!important;
   transition: 0.6s!important;
 }
-.btn_edit:hover{
-  background: #8CA4F0!important;
+.btn_locked:hover{
   width: 100%!important;
-}
-
-.btn_del{
-  width: 60%!important;
-  background: #313131!important;
-  border-radius: 5px!important;
-  color: white!important;
-  transition: 0.6s!important;
-}
-.btn_del:hover{
-  background: #F26969!important;
-   width: 100%!important;
-}
-.card{
-  text-align: center;
-}
+}*/
