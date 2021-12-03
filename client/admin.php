@@ -19,6 +19,10 @@
         <button class="btn btn_indiceCategoria" id="show_prodCategoria"><i id="arrow_prodCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Productos</label></button>
             <button class="btn btn_indiceSubCategoria" id="add_prodPos">Añadir productos</button>
             <button class="btn btn_indiceSubCategoria" id="list_prodPos">Lista de productos</button>
+
+        <button class="btn btn_indiceCategoria" id="show_areaCategoria"><i id="arrow_areaCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Area</label></button>
+            <button class="btn btn_indiceSubCategoria" id="add_areaPos">Añadir area</button>
+            <button class="btn btn_indiceSubCategoria" id="list_areaPos">Lista de areas</button>
       </div>
       <div class="container card admin_content mt-4 col-12 col-lg-8">
         <h2 id="prod_upl_edit">Añadir producto</h2>
@@ -116,21 +120,79 @@
               
             </div>
           </div>
+        <h2 id="area_upl_edit">Añadir area</h2>
+        <div class="add_area mt-4 mb-4">
+          <form>
+            <div class="row">
+                <div class="col-12">
+                  <input type="text" class="form-control" id="id_area" name="id_area" readonly="readonly" placeholder="id..." hidden="true">
+                </div>
+                <div class="col-6">
+                  <label for="nombre_area">Ingresar un nombre para el area*</label>
+                  <input type="text" class="form-control nombre_area" name="nombre_area" placeholder="nombre...">
+                </div>
+                <div class="col-6">
+                  <label for="descripcion_area">Ingresar una descripcion para el area*</label>
+                  <input type="text" class="form-control descripcion_area" name="descripcion_area" placeholder="descripcion...">
+                </div>
+                <div class="col-12">
+                  <br>
+                </div>
+                <div class="upload_buttons button-row justify-content-end d-flex">
+                  <div class="col-6">
+                    <button type="submit" formaction="area_upload.php" class="btn btn_blue">Añadir</button>
+                  </div>
+                </div>                
+            </div>
+          </form>
+        </div>
+        <h2 id="area_edit_del">Modificar area</h2>  
+          <div class="row mb-2">
+            <div class="col-9"></div>
+            <div class="col-3">Buscar:</div>
+            <div class="col-9"></div>
+            <div class="col-3">
+              <input type="text" class="form-control area_search_bar" name="area_search_bar">
+            </div>
+          </div>
+          <div class="area_list">
+            <table id="area_list" class="table table-striped table-hover prod_table">
+            </table>
+            <div class="button-row justify-content-end d-flex mb-4" id="btn_back_next">
+             
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </div>
   </body>
   <script type="text/javascript">
+    //########### PRODUCTOS ##############
     var show_prodCategoria = document.getElementById("show_prodCategoria");
     var arrow_prodCateegoria = document.getElementById("arrow_prodCategoria");
-    var add_prodPos = document.getElementById("add_prodPos")
+    var add_prodPos = document.getElementById("add_prodPos");
     var list_prodPos = document.getElementById("list_prodPos");
+    //########### AREA ##############
+    var show_areaCategoria = document.getElementById("show_areaCategoria");
+    var arrow_areaCateegoria = document.getElementById("arrow_areaCategoria");
+    var add_areaPos = document.getElementById("add_areaPos");
+    var list_areaPos = document.getElementById("list_areaPos");
+
     show_prodCategoria.addEventListener('click', function(){
       arrow_prodCateegoria.classList.toggle("fa-caret-right");
       arrow_prodCateegoria.classList.toggle("fa-caret-down");
       add_prodPos.classList.toggle("show")
       list_prodPos.classList.toggle("show")
     });
+
+    show_areaCategoria.addEventListener('click', function(){
+      arrow_areaCateegoria.classList.toggle("fa-caret-right");
+      arrow_areaCateegoria.classList.toggle("fa-caret-down");
+      add_areaPos.classList.toggle("show")
+      list_areaPos.classList.toggle("show")
+    });
+
     add_prodPos.addEventListener('click', function(){
       function findPos(obj) {
                   var curtop = 0;
@@ -154,6 +216,31 @@
                   }
                 }
                 window.scroll(0,findPos(document.getElementById("prod_edit_del")));
+    });
+
+    add_areaPos.addEventListener('click', function(){
+      function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("area_upl_edit")));
+    });
+    list_areaPos.addEventListener('click', function(){
+      function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("area_edit_del")));
     });
   </script>
   <script type="text/javascript" src="js/admin.js"></script>
