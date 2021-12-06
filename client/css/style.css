@@ -118,6 +118,8 @@ color: darkblue;
 }
 .indice_content{
   height: 100%;
+  position: sticky!important;
+  top: 60px;
 }
 .admin_content h2, .indice_content h2{
   margin: 0 -16px;

@@ -1,7 +1,14 @@
 // declaracion de variables:
 //paginador
-var desde = 0;
-var hasta = 20;
+var desde_prod = 0;
+var hasta_prod = 20;
+
+var desde_area = 0;
+var hasta_area = 20;
+
+var desde_cat = 0;
+var hasta_cat = 20;
+
 
 // llamamos al select con la clase "filter_area" y tomamos su valor
 filter_area = document.querySelector(".filter_area");
@@ -42,12 +49,38 @@ prod_search_bar.addEventListener('input', function(){
   lista_productos()
 })
 
+// llamamos al input con la clase "search_bar" y tomamos su valor
+area_search_bar = document.querySelector(".area_search_bar");
+search_area = document.querySelector(".area_search_bar").value;
+
+// actualizar funcion cuando cambia el contenido de "search_bar"
+area_search_bar.addEventListener('input', function(){
+  search_area = document.querySelector(".area_search_bar").value;
+  lista_areas()
+})
+
+// llamamos al input con la clase "search_bar" y tomamos su valor
+cat_search_bar = document.querySelector(".cat_search_bar");
+search_cat = document.querySelector(".cat_search_bar").value;
+
+// actualizar funcion cuando cambia el contenido de "search_bar"
+cat_search_bar.addEventListener('input', function(){
+  search_cat = document.querySelector(".cat_search_bar").value;
+  lista_categorias()
+})
+
 //  llamamos al input con el id "id_prod"
 id_prod_bar = document.getElementById("id_prod")
 
+//  llamamos al input con el id "id_prod"
+id_area_bar = document.getElementById("id_area")
+
+//  llamamos al input con el id "id_prod"
+id_cat_bar = document.getElementById("id_cat")
+
 // creamos una funcion para cuando el valor de id_prod cambie
 function id_prod_change(){
-  fetch("http://localhost/github/Sol-de-Mayo/server/productos")
+  fetch("http://localhost/github/SDM/server/productos")
           .then((res) => res.json())
           .then((data) => {
               console.log(data);
@@ -77,7 +110,7 @@ function id_prod_change(){
                 inputMarca.value = producto.id_marca;
               }))
             });
-          upload_buttons = document.querySelector(".upload_buttons");
+          upload_buttons = document.querySelector(".upload_buttons_prod");
           upload_buttons.innerHTML="";
 
           const div_del_upload = document.createElement("div");
@@ -101,8 +134,98 @@ function id_prod_change(){
           upload_buttons.appendChild(div_edit_upload);
 }
 
+function id_area_change(){
+  fetch("http://localhost/github/SDM/server/areas")
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              // data = data[0];
+              // console.log(data);
+              const inputNombre = document.querySelector(".nombre_area");
+              const inputDescripcion = document.querySelector(".descripcion_area");
+              
+               // filtra el producto por id
+                 data = data.filter(function(items){
+                 return (items.id == id_area_bar.value);
+                 });
+                 console.log(data);
+
+              data.map((area => {
+                inputNombre.value = area.n_area;
+                inputDescripcion.value = area.desc_area;
+              }))
+            });
+          upload_buttons = document.querySelector(".upload_buttons_area");
+          upload_buttons.innerHTML="";
+
+          const div_del_upload = document.createElement("div");
+          div_del_upload.className = "col-6";
+          const btn_del_upload = document.createElement("button");
+          btn_del_upload.type = "submit";
+          btn_del_upload.className = "btn btn_red";
+          btn_del_upload.innerText = "Cancelar"
+
+          const div_edit_upload = document.createElement("div");
+          div_edit_upload.className = "col-6";
+          const btn_edit_upload = document.createElement("button");
+          btn_edit_upload.type = "submit";
+          btn_edit_upload.formAction = "area_edit.php";
+          btn_edit_upload.className = "btn btn_blue";
+          btn_edit_upload.innerText = "Editar"
+
+          div_del_upload.appendChild(btn_del_upload);
+          upload_buttons.appendChild(div_del_upload);
+          div_edit_upload.appendChild(btn_edit_upload);
+          upload_buttons.appendChild(div_edit_upload);
+}
+
+function id_cat_change(){
+  fetch("http://localhost/github/SDM/server/categorias")
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              // data = data[0];
+              // console.log(data);
+              const inputNombre = document.querySelector(".nombre_cat");
+              const inputDescripcion = document.querySelector(".descripcion_cat");
+              
+               // filtra el producto por id
+                 data = data.filter(function(items){
+                 return (items.id == id_cat_bar.value);
+                 });
+                 console.log(data);
+
+              data.map((categoria => {
+                inputNombre.value = categoria.tipo;
+                inputDescripcion.value = categoria.descripcion;
+              }))
+            });
+          upload_buttons = document.querySelector(".upload_buttons_cat");
+          upload_buttons.innerHTML="";
+
+          const div_del_upload = document.createElement("div");
+          div_del_upload.className = "col-6";
+          const btn_del_upload = document.createElement("button");
+          btn_del_upload.type = "submit";
+          btn_del_upload.className = "btn btn_red";
+          btn_del_upload.innerText = "Cancelar"
+
+          const div_edit_upload = document.createElement("div");
+          div_edit_upload.className = "col-6";
+          const btn_edit_upload = document.createElement("button");
+          btn_edit_upload.type = "submit";
+          btn_edit_upload.formAction = "cat_edit.php";
+          btn_edit_upload.className = "btn btn_blue";
+          btn_edit_upload.innerText = "Editar"
+
+          div_del_upload.appendChild(btn_del_upload);
+          upload_buttons.appendChild(div_del_upload);
+          div_edit_upload.appendChild(btn_edit_upload);
+          upload_buttons.appendChild(div_edit_upload);
+}
+
 function filtros_areas() {
-          fetch("http://localhost/github/Sol-de-Mayo/server/areas")
+          fetch("http://localhost/github/SDM/server/areas")
           .then((res) => res.json())
           .then((data) => {
               console.log(data);
@@ -126,7 +249,7 @@ function filtros_areas() {
 };
 
 function filtros_categorias() {
-          fetch("http://localhost/github/Sol-de-Mayo/server/categorias")
+          fetch("http://localhost/github/SDM/server/categorias")
           .then((res) => res.json())
           .then((data) => {
               console.log(data);
@@ -150,7 +273,7 @@ function filtros_categorias() {
 };
 
 function filtros_marcas() {
-          fetch("http://localhost/github/Sol-de-Mayo/server/marcas")
+          fetch("http://localhost/github/SDM/server/marcas")
           .then((res) => res.json())
           .then((data) => {
               console.log(data);
@@ -174,7 +297,7 @@ function filtros_marcas() {
 };
 
 function lista_productos() {
-          fetch("http://localhost/github/Sol-de-Mayo/server/productos")
+          fetch("http://localhost/github/SDM/server/productos")
           .then((res) => res.json())
           .then((data) => {
               console.log(data);
@@ -277,10 +400,10 @@ function lista_productos() {
               divDatos.appendChild(thead);
               }
 
-              console.log(desde);
+              console.log(desde_prod);
 
-                if (desde != 0) {
-                btn_back_next = document.getElementById("btn_back_next");
+                if (desde_prod != 0) {
+                btn_back_next = document.getElementById("btn_back_next_prod");
                 btn_back_next.innerHTML="",
                 divNext = document.createElement("div");
                 divNext.className = "col-6";
@@ -298,7 +421,7 @@ function lista_productos() {
                 btn_back_next.appendChild(divBack)
                 btn_back_next.appendChild(divNext)
               }else{
-                btn_back_next = document.getElementById("btn_back_next");
+                btn_back_next = document.getElementById("btn_back_next_prod");
                 btn_back_next.innerHTML="",
                 divNext = document.createElement("div");
                 divNext.className = "col-6";
@@ -311,15 +434,15 @@ function lista_productos() {
               }
 
               btnNext.addEventListener('click', function(){
-                  desde += 20;
-                  hasta += 20;
+                  desde_prod += 20;
+                  hasta_prod += 20;
                   lista_productos()
               })
 
-              if (desde!=0) {
+              if (desde_prod!=0) {
                 btnBack.addEventListener('click', function(){
-                  desde -= 20;
-                  hasta -= 20;
+                  desde_prod -= 20;
+                  hasta_prod -= 20;
                   lista_productos()
                 })
               }
@@ -328,7 +451,7 @@ function lista_productos() {
 
               data.map(((producto, index) => {
 
-              if (index>=desde & index<hasta) {
+              if (index>=desde_prod & index<hasta_prod) {
 
               const fila = document.createElement("tr");
               const id = document.createElement("th");
@@ -402,9 +525,335 @@ function lista_productos() {
             });
         };
 
+        function lista_areas() {
+          fetch("http://localhost/github/SDM/server/areas")
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              // data = data[0];
+              // console.log(data);
+              const divDatos = document.getElementById("area_list");
+              divDatos.innerHTML="";
+
+               // filtra la barra d busqueda
+               if (search_area !== "") {
+                 data = data.filter(function(items){
+                 return items.n_area.toLowerCase().indexOf(search_area.toLowerCase()) > -1;
+                 });
+                 console.log(data);
+               } else{}
+
+               // si no puede traer ningun producto de la base de datos muestra un mensaje
+               if (data.length == 0) {
+                 const fila_nr = document.createElement("tr");
+                 const non_result = document.createElement("td");
+                 non_result.innerText = "Lo sentimos, no encontramos resultados para su busqueda...";
+                 fila_nr.appendChild(non_result);
+                 divDatos.appendChild(fila_nr);
+                 console.log(non_result);
+               }else{
+              const thead = document.createElement("thead");
+              const fila = document.createElement("tr");
+              const id = document.createElement("th");
+              id.innerText = "ID";
+              id.scope = "col";
+              const nombre = document.createElement("th");
+              nombre.innerText = "Nombre";
+              nombre.scope = "col";
+              const descripcion = document.createElement("th");
+              descripcion.innerText = "Descripcion";
+              descripcion.scope = "col";
+              const editar = document.createElement("th");
+              editar.innerText = "Modificar";
+              editar.scope = "col";
+              const eliminar = document.createElement("th");
+              eliminar.innerText = "Eliminar";
+              eliminar.scope = "col";
+
+              fila.appendChild(id);
+              fila.appendChild(nombre);
+              fila.appendChild(descripcion);
+              fila.appendChild(editar);
+              fila.appendChild(eliminar);
+
+              thead.appendChild(fila);
+              divDatos.appendChild(thead);
+              }
+
+              console.log(desde_area);
+
+                if (desde_area != 0) {
+                btn_back_next = document.getElementById("btn_back_next_area");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                divBack = document.createElement("div");
+                divBack.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.className = "btn btn_blue";
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnBack = document.createElement("button");
+                btnBack.className = "btn btn_blue";
+                btnBack.innerHTML = '<i class="fa-solid fa-angles-left"></i>';
+
+                divBack.appendChild(btnBack);
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divBack)
+                btn_back_next.appendChild(divNext)
+              }else{
+                btn_back_next = document.getElementById("btn_back_next_area");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnNext.className = "btn btn_blue";
+
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divNext)
+              }
+
+              btnNext.addEventListener('click', function(){
+                  desde_area += 20;
+                  hasta_area += 20;
+                  lista_areas()
+              })
+
+              if (desde_area!=0) {
+                btnBack.addEventListener('click', function(){
+                  desde_area -= 20;
+                  hasta_area -= 20;
+                  lista_areas()
+                })
+              }
+
+                
+
+              const tbody = document.createElement("tbody");
+
+              data.map(((area, index) => {
+
+              if (index>=desde_area & index<hasta_area) {
+
+              const fila = document.createElement("tr");
+              const id = document.createElement("th");
+              id.innerText = area.id;
+              id.scope = "row";
+              const nombre = document.createElement("td");
+              nombre.innerText = area.n_area;
+              const descripcion = document.createElement("td");
+              descripcion.innerText = area.desc_area;
+              const editar = document.createElement("td");
+              editar.innerHTML = '<button class="btn btn_blue" id="edit_area'+ area.id + '" name"edit"><i class="fa-solid fa-pen"></i></button>';
+              const eliminar = document.createElement("td");
+              eliminar.innerHTML = '<button class="btn btn_red" id="delete_area'+ area.id + '" name"delete"><i class="fa-solid fa-trash-can"></i></button>';
+
+
+              fila.appendChild(id);
+              fila.appendChild(nombre);
+              fila.appendChild(descripcion);
+              fila.appendChild(editar);
+              fila.appendChild(eliminar);
+
+              tbody.appendChild(fila)
+              divDatos.appendChild(tbody);
+
+              btnEdit = document.getElementById("edit_area" + area.id)
+
+              btnEdit.addEventListener('click', function(){
+                function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("area_upl_edit")));
+                id_area_bar.value = area.id;
+                id_area_change();
+              })
+
+              btnDelete = document.getElementById("delete_area" + area.id)
+
+              btnDelete.addEventListener('click', function(){
+                var para = new URLSearchParams();
+                para.append("id", area.id);
+                location.href = "area_delete.php?" + para.toString();
+              })
+              }
+              }))
+            });
+        };
+
+        function lista_categorias() {
+          fetch("http://localhost/github/SDM/server/categorias")
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              // data = data[0];
+              // console.log(data);
+              const divDatos = document.getElementById("cat_list");
+              divDatos.innerHTML="";
+
+               // filtra la barra d busqueda
+               if (search_cat !== "") {
+                 data = data.filter(function(items){
+                 return items.tipo.toLowerCase().indexOf(search_cat.toLowerCase()) > -1;
+                 });
+                 console.log(data);
+               } else{}
+
+               // si no puede traer ningun producto de la base de datos muestra un mensaje
+               if (data.length == 0) {
+                 const fila_nr = document.createElement("tr");
+                 const non_result = document.createElement("td");
+                 non_result.innerText = "Lo sentimos, no encontramos resultados para su busqueda...";
+                 fila_nr.appendChild(non_result);
+                 divDatos.appendChild(fila_nr);
+                 console.log(non_result);
+               }else{
+              const thead = document.createElement("thead");
+              const fila = document.createElement("tr");
+              const id = document.createElement("th");
+              id.innerText = "ID";
+              id.scope = "col";
+              const nombre = document.createElement("th");
+              nombre.innerText = "Nombre";
+              nombre.scope = "col";
+              const descripcion = document.createElement("th");
+              descripcion.innerText = "Descripcion";
+              descripcion.scope = "col";
+              const editar = document.createElement("th");
+              editar.innerText = "Modificar";
+              editar.scope = "col";
+              const eliminar = document.createElement("th");
+              eliminar.innerText = "Eliminar";
+              eliminar.scope = "col";
+
+              fila.appendChild(id);
+              fila.appendChild(nombre);
+              fila.appendChild(descripcion);
+              fila.appendChild(editar);
+              fila.appendChild(eliminar);
+
+              thead.appendChild(fila);
+              divDatos.appendChild(thead);
+              }
+
+              console.log(desde_cat);
+
+                if (desde_cat != 0) {
+                btn_back_next = document.getElementById("btn_back_next_cat");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                divBack = document.createElement("div");
+                divBack.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.className = "btn btn_blue";
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnBack = document.createElement("button");
+                btnBack.className = "btn btn_blue";
+                btnBack.innerHTML = '<i class="fa-solid fa-angles-left"></i>';
+
+                divBack.appendChild(btnBack);
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divBack)
+                btn_back_next.appendChild(divNext)
+              }else{
+                btn_back_next = document.getElementById("btn_back_next_cat");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnNext.className = "btn btn_blue";
+
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divNext)
+              }
+
+              btnNext.addEventListener('click', function(){
+                  desde_cat += 20;
+                  hasta_cat += 20;
+                  lista_categorias()
+              })
+
+              if (desde_cat!=0) {
+                btnBack.addEventListener('click', function(){
+                  desde_cat -= 20;
+                  hasta_cat -= 20;
+                  lista_categorias()
+                })
+              }
+
+                
+
+              const tbody = document.createElement("tbody");
+
+              data.map(((categoria, index) => {
+
+              if (index>=desde_cat & index<hasta_cat) {
+
+              const fila = document.createElement("tr");
+              const id = document.createElement("th");
+              id.innerText = categoria.id;
+              id.scope = "row";
+              const nombre = document.createElement("td");
+              nombre.innerText = categoria.tipo;
+              const descripcion = document.createElement("td");
+              descripcion.innerText = categoria.descripcion;
+              const editar = document.createElement("td");
+              editar.innerHTML = '<button class="btn btn_blue" id="edit_cat'+ categoria.id + '" name"edit"><i class="fa-solid fa-pen"></i></button>';
+              const eliminar = document.createElement("td");
+              eliminar.innerHTML = '<button class="btn btn_red" id="delete_cat'+ categoria.id + '" name"delete"><i class="fa-solid fa-trash-can"></i></button>';
+
+
+              fila.appendChild(id);
+              fila.appendChild(nombre);
+              fila.appendChild(descripcion);
+              fila.appendChild(editar);
+              fila.appendChild(eliminar);
+
+              tbody.appendChild(fila)
+              divDatos.appendChild(tbody);
+
+              btnEdit = document.getElementById("edit_cat" + categoria.id)
+
+              btnEdit.addEventListener('click', function(){
+                function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("cat_upl_edit")));
+                id_cat_bar.value = categoria.id;
+                id_cat_change();
+              })
+
+              btnDelete = document.getElementById("delete_cat" + categoria.id)
+
+              btnDelete.addEventListener('click', function(){
+                var para = new URLSearchParams();
+                para.append("id", categoria.id);
+                location.href = "cat_delete.php?" + para.toString();
+              })
+              }
+              }))
+            });
+        };
+
       document.addEventListener("DOMContentLoaded", function (event) {
         filtros_areas()
         filtros_categorias()
         filtros_marcas()
         lista_productos() 
+        lista_areas() 
+        lista_categorias()
       });
