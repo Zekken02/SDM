@@ -13,30 +13,38 @@
   <body>
     <?php $target_radio = 2 ?>
     <?php include 'navbar.php' ?>
-    <div id="filtros" class="filtros">
-      <!--========== INPUTS PARA AREA DE PRODUCTO ============-->
-      <div id="filter_area" class="filter_area">
-        <input type="radio" value="" name="area" class="select_area" id="area0" checked="checked">
-        <label for="area0">Todas</label>
-      </div>
+    <div class="m-auto row">
+      <div id="filtros" class="filtros col-3 mt-4 ml-4">
+        <h2 class="mb-2">Buscar</h2>
+        <!--========== INPUT BARRA DE BUSQUEDA ============-->
+        <input type="search" name="search_bar" class="search_bar mt-2 form-control" placeholder="buscar...">
+        <!--========== INPUTS PARA AREA DE PRODUCTO ============-->
+        <h2 class="mb-2 mt-2">Area</h2>
+        <div id="filter_area" class="filter_area">
+          <input type="radio" value="" name="area" class="select_area" id="area0" checked="checked">
+          <label for="area0">Todas</label>
+        </div>
 
-      <!--========== INPUTS PARA CATEGORIA DE PRODUCTO ============-->
-      <div id="filter_categoria" class="filter_categoria">
-        <input type="radio" value="" name="categoria" class="select_categoria" id="categoria0" checked="checked">
-        <label for="categoria0">Todas</label>
-      </div>
+        <!--========== INPUTS PARA CATEGORIA DE PRODUCTO ============-->
+        <h2 class="mb-2 mt-2">Categoria</h2>
+        <div id="filter_categoria" class="filter_categoria">
+          <input type="radio" value="" name="categoria" class="select_categoria" id="categoria0" checked="checked">
+          <label for="categoria0">Todas</label>
+        </div>
 
-      <!--========== INPUTS PARA MARCA DE PRODUCTO ============-->
-      <div id="filter_marca" class="filter_marca">
-        <input type="radio" value="" name="marca" class="select_marca" id="marca0" checked="checked">
-        <label for="marca0">Todas</label>
-      </div>
+        <!--========== INPUTS PARA MARCA DE PRODUCTO ============-->
+        <h2 class="mb-2 mt-2">Marca</h2>
+        <div id="filter_marca" class="filter_marca">
+          <input type="radio" value="" name="marca" class="select_marca" id="marca0" checked="checked">
+          <label for="marca0">Todas</label>
+        </div>
 
-      <!--========== INPUT BARRA DE BUSQUEDA ============-->
-      <input type="search" name="search_bar" class="search_bar" placeholder="buscar...">
+      </div>
+      <!--========== DIV QUE CONTIENE LAS TARJETAS ============-->
+      <div class="container col-8 mt-4">
+        <div id="datos" class="datos row"></div>
+      </div>
     </div>
-    <!--========== DIV QUE CONTIENE LAS TARJETAS ============-->
-    <div id="datos" class="datos"></div>
-  </body>
   <script type="text/javascript" src="js/productos.js"></script>
+  </body>
 </html>

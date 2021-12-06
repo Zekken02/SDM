@@ -170,28 +170,41 @@ function tarjetas_productos() {
               }else{}
 
               data.map((producto => {
+              const divFather = document.createElement("div");
+              divFather.className += "col-4 mt-2";
               const div = document.createElement("div");
-              div.className += "card"; 
+              div.className += "item_card card";
               const img = document.createElement("img");
-              img.src = producto.imagen;
-              img.className = "img-card";
+              img.src = "img/890.png";
+              img.className = "img_card m-auto";
               const nombre = document.createElement("h2");
               nombre.innerText = producto.nombre;
               const descripcion = document.createElement("h3");
               descripcion.innerText = producto.descripcion;
               const marca = document.createElement("h3");
               marca.innerText = producto.n_marca;
+              const divMinor = document.createElement("div");
+              divMinor.className += "row";
               const precio = document.createElement("p");
               precio.innerText = "precio: " + "$" + producto.precio;
+              precio.className += "col-6";
               const stock = document.createElement("p");
               stock.innerText = "quedan: " + producto.stock;
+              stock.className += "col-6";
+              const comprar = document.createElement("button");
+              comprar.className += "btn btn_blue m-auto";
+              comprar.innerText = "Añadir al carrito";
+
               div.appendChild(img);
               div.appendChild(nombre);
               div.appendChild(descripcion);
               div.appendChild(marca);
-              div.appendChild(precio);
-              div.appendChild(stock);
-              divDatos.appendChild(div);
+              divMinor.appendChild(precio);
+              divMinor.appendChild(stock);
+              div.appendChild(divMinor);
+              div.appendChild(comprar);
+              divFather.appendChild(div);
+              divDatos.appendChild(divFather);
               }))
             });
         };

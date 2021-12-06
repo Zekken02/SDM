@@ -9,6 +9,8 @@ var hasta_area = 20;
 var desde_cat = 0;
 var hasta_cat = 20;
 
+var desde_marca = 0;
+var hasta_marca = 20;
 
 // llamamos al select con la clase "filter_area" y tomamos su valor
 filter_area = document.querySelector(".filter_area");
@@ -69,6 +71,16 @@ cat_search_bar.addEventListener('input', function(){
   lista_categorias()
 })
 
+// llamamos al input con la clase "search_bar" y tomamos su valor
+marca_search_bar = document.querySelector(".marca_search_bar");
+search_marca = document.querySelector(".marca_search_bar").value;
+
+// actualizar funcion cuando cambia el contenido de "search_bar"
+marca_search_bar.addEventListener('input', function(){
+  search_marca = document.querySelector(".marca_search_bar").value;
+  lista_marcas()
+})
+
 //  llamamos al input con el id "id_prod"
 id_prod_bar = document.getElementById("id_prod")
 
@@ -77,6 +89,9 @@ id_area_bar = document.getElementById("id_area")
 
 //  llamamos al input con el id "id_prod"
 id_cat_bar = document.getElementById("id_cat")
+
+//  llamamos al input con el id "id_prod"
+id_marca_bar = document.getElementById("id_marca")
 
 // creamos una funcion para cuando el valor de id_prod cambie
 function id_prod_change(){
@@ -215,6 +230,51 @@ function id_cat_change(){
           const btn_edit_upload = document.createElement("button");
           btn_edit_upload.type = "submit";
           btn_edit_upload.formAction = "cat_edit.php";
+          btn_edit_upload.className = "btn btn_blue";
+          btn_edit_upload.innerText = "Editar"
+
+          div_del_upload.appendChild(btn_del_upload);
+          upload_buttons.appendChild(div_del_upload);
+          div_edit_upload.appendChild(btn_edit_upload);
+          upload_buttons.appendChild(div_edit_upload);
+}
+
+function id_marca_change(){
+  fetch("http://localhost/github/SDM/server/marcas")
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              // data = data[0];
+              // console.log(data);
+              const inputNombre = document.querySelector(".nombre_marca");
+              const inputDescripcion = document.querySelector(".descripcion_marca");
+              
+               // filtra el producto por id
+                 data = data.filter(function(items){
+                 return (items.id == id_marca_bar.value);
+                 });
+                 console.log(data);
+
+              data.map((marca => {
+                inputNombre.value = marca.n_marca;
+                inputDescripcion.value = marca.descripcion;
+              }))
+            });
+          upload_buttons = document.querySelector(".upload_buttons_marca");
+          upload_buttons.innerHTML="";
+
+          const div_del_upload = document.createElement("div");
+          div_del_upload.className = "col-6";
+          const btn_del_upload = document.createElement("button");
+          btn_del_upload.type = "submit";
+          btn_del_upload.className = "btn btn_red";
+          btn_del_upload.innerText = "Cancelar"
+
+          const div_edit_upload = document.createElement("div");
+          div_edit_upload.className = "col-6";
+          const btn_edit_upload = document.createElement("button");
+          btn_edit_upload.type = "submit";
+          btn_edit_upload.formAction = "marca_edit.php";
           btn_edit_upload.className = "btn btn_blue";
           btn_edit_upload.innerText = "Editar"
 
@@ -849,6 +909,168 @@ function lista_productos() {
             });
         };
 
+        function lista_marcas() {
+          fetch("http://localhost/github/SDM/server/marcas")
+          .then((res) => res.json())
+          .then((data) => {
+              console.log(data);
+              // data = data[0];
+              // console.log(data);
+              const divDatos = document.getElementById("marca_list");
+              divDatos.innerHTML="";
+
+               // filtra la barra d busqueda
+               if (search_marca !== "") {
+                 data = data.filter(function(items){
+                 return items.n_marca.toLowerCase().indexOf(search_marca.toLowerCase()) > -1;
+                 });
+                 console.log(data);
+               } else{}
+
+               // si no puede traer ningun producto de la base de datos muestra un mensaje
+               if (data.length == 0) {
+                 const fila_nr = document.createElement("tr");
+                 const non_result = document.createElement("td");
+                 non_result.innerText = "Lo sentimos, no encontramos resultados para su busqueda...";
+                 fila_nr.appendChild(non_result);
+                 divDatos.appendChild(fila_nr);
+                 console.log(non_result);
+               }else{
+              const thead = document.createElement("thead");
+              const fila = document.createElement("tr");
+              const id = document.createElement("th");
+              id.innerText = "ID";
+              id.scope = "col";
+              const nombre = document.createElement("th");
+              nombre.innerText = "Nombre";
+              nombre.scope = "col";
+              const descripcion = document.createElement("th");
+              descripcion.innerText = "Descripcion";
+              descripcion.scope = "col";
+              const editar = document.createElement("th");
+              editar.innerText = "Modificar";
+              editar.scope = "col";
+              const eliminar = document.createElement("th");
+              eliminar.innerText = "Eliminar";
+              eliminar.scope = "col";
+
+              fila.appendChild(id);
+              fila.appendChild(nombre);
+              fila.appendChild(descripcion);
+              fila.appendChild(editar);
+              fila.appendChild(eliminar);
+
+              thead.appendChild(fila);
+              divDatos.appendChild(thead);
+              }
+
+              console.log(desde_marca);
+
+                if (desde_marca != 0) {
+                btn_back_next = document.getElementById("btn_back_next_marca");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                divBack = document.createElement("div");
+                divBack.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.className = "btn btn_blue";
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnBack = document.createElement("button");
+                btnBack.className = "btn btn_blue";
+                btnBack.innerHTML = '<i class="fa-solid fa-angles-left"></i>';
+
+                divBack.appendChild(btnBack);
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divBack)
+                btn_back_next.appendChild(divNext)
+              }else{
+                btn_back_next = document.getElementById("btn_back_next_marca");
+                btn_back_next.innerHTML="",
+                divNext = document.createElement("div");
+                divNext.className = "col-6";
+                btnNext = document.createElement("button");
+                btnNext.innerHTML = '<i class="fa-solid fa-angles-right"></i>';
+                btnNext.className = "btn btn_blue";
+
+                divNext.appendChild(btnNext);
+                btn_back_next.appendChild(divNext)
+              }
+
+              btnNext.addEventListener('click', function(){
+                  desde_marca += 20;
+                  hasta_marca += 20;
+                  lista_marcas()
+              })
+
+              if (desde_marca!=0) {
+                btnBack.addEventListener('click', function(){
+                  desde_marca -= 20;
+                  hasta_marca -= 20;
+                  lista_marcas()
+                })
+              }
+
+                
+
+              const tbody = document.createElement("tbody");
+
+              data.map(((marca, index) => {
+
+              if (index>=desde_marca & index<hasta_marca) {
+
+              const fila = document.createElement("tr");
+              const id = document.createElement("th");
+              id.innerText = marca.id;
+              id.scope = "row";
+              const nombre = document.createElement("td");
+              nombre.innerText = marca.n_marca;
+              const descripcion = document.createElement("td");
+              descripcion.innerText = marca.descripcion;
+              const editar = document.createElement("td");
+              editar.innerHTML = '<button class="btn btn_blue" id="edit_marca'+ marca.id + '" name"edit"><i class="fa-solid fa-pen"></i></button>';
+              const eliminar = document.createElement("td");
+              eliminar.innerHTML = '<button class="btn btn_red" id="delete_marca'+ marca.id + '" name"delete"><i class="fa-solid fa-trash-can"></i></button>';
+
+
+              fila.appendChild(id);
+              fila.appendChild(nombre);
+              fila.appendChild(descripcion);
+              fila.appendChild(editar);
+              fila.appendChild(eliminar);
+
+              tbody.appendChild(fila)
+              divDatos.appendChild(tbody);
+
+              btnEdit = document.getElementById("edit_marca" + marca.id)
+
+              btnEdit.addEventListener('click', function(){
+                function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("marca_upl_edit")));
+                id_marca_bar.value = marca.id;
+                id_marca_change();
+              })
+
+              btnDelete = document.getElementById("delete_marca" + marca.id)
+
+              btnDelete.addEventListener('click', function(){
+                var para = new URLSearchParams();
+                para.append("id", marca.id);
+                location.href = "marca_delete.php?" + para.toString();
+              })
+              }
+              }))
+            });
+        };
+
       document.addEventListener("DOMContentLoaded", function (event) {
         filtros_areas()
         filtros_categorias()
@@ -856,4 +1078,5 @@ function lista_productos() {
         lista_productos() 
         lista_areas() 
         lista_categorias()
+        lista_marcas()
       });

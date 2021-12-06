@@ -99,16 +99,35 @@ nav .logo h1{
 }
 
 /*=========== FILTROS =============*/
-input[type="radio"]{
+.filtros{
+  height: 100%;
+  background: #ABAAAA;
+  text-align: center;
+  position: sticky!important;
+  top: 40px;
+}
+.filtros input[type="radio"]{
   display: none;
 }
-label{
+.filtros label{
+  margin: 5px;
+  padding: 5px;
+  border-radius: 10%;
+  background: #313131;
   cursor:pointer;
-  color:blue;
-  text-decoration:underline;
+  color: white;
+  transition: 0.2s;
 }
-input[type="radio"]:checked + label{
-color: darkblue;
+.filtros input[type="radio"]:checked + label{
+  background: #8CA4F0;
+  padding: 5px 20px;
+}
+.filtros h2{
+  margin: 0 -16px;
+  padding: 5px;
+  background: #313131;
+  color: white;
+  font-size: 25px;
 }
 
 /*=========== ADMIN FORMS AND TABLES =============*/
@@ -206,3 +225,21 @@ color: darkblue;
 .btn_locked:hover{
   width: 100%!important;
 }*/
+
+/*=========== PRODUCTOS =============*/
+
+.item_card{
+  width: 80%;
+  padding: 5px;
+  margin: auto;
+  text-align: center;
+}
+.item_card h2{
+  font-size: 25px;
+}
+.item_card h3{
+  font-size: 20px;
+}
+.img_card{
+  width: 100%!important;
+}

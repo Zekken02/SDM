@@ -20,12 +20,15 @@
             <button class="btn btn_indiceSubCategoria" id="add_prodPos">Añadir productos</button>
             <button class="btn btn_indiceSubCategoria" id="list_prodPos">Lista de productos</button>
 
-        <button class="btn btn_indiceCategoria" id="show_areaCategoria"><i id="arrow_areaCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Area</label></button>
+        <button class="btn btn_indiceCategoria" id="show_areaCategoria"><i id="arrow_areaCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Areas</label></button>
             <button class="btn btn_indiceSubCategoria" id="add_areaPos">Añadir area</button>
             <button class="btn btn_indiceSubCategoria" id="list_areaPos">Lista de areas</button>
-        <button class="btn btn_indiceCategoria" id="show_catCategoria"><i id="arrow_catCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Categoria</label></button>
+        <button class="btn btn_indiceCategoria" id="show_catCategoria"><i id="arrow_catCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Categorias</label></button>
             <button class="btn btn_indiceSubCategoria" id="add_catPos">Añadir categoria</button>
             <button class="btn btn_indiceSubCategoria" id="list_catPos">Lista de categorias</button>
+        <button class="btn btn_indiceCategoria" id="show_marcaCategoria"><i id="arrow_marcaCategoria" class="fa-solid fa-caret-right"></i><label class="ml-2">Marcas</label></button>
+            <button class="btn btn_indiceSubCategoria" id="add_marcaPos">Añadir marca</button>
+            <button class="btn btn_indiceSubCategoria" id="list_marcaPos">Lista de marcas</button>
 
         <button class="btn btn_indiceCategoria" id="pageUp_admin" onclick="topFunction()"><label class="ml-2">Volver arriba</label></button>
       </div>
@@ -209,6 +212,48 @@
              
             </div>
           </div>
+          <h2 id="marca_upl_edit">Añadir marca</h2>
+        <div class="add_marca mt-4 mb-4">
+          <form>
+            <div class="row">
+                <div class="col-12">
+                  <input type="text" class="form-control" id="id_marca" name="id_marca" readonly="readonly" placeholder="id..." hidden="true">
+                </div>
+                <div class="col-6">
+                  <label for="nombre_marca">Ingresar un nombre para la categoria*</label>
+                  <input type="text" class="form-control nombre_marca" name="nombre_marca" placeholder="nombre...">
+                </div>
+                <div class="col-6">
+                  <label for="descripcion_marca">Ingresar una descripcion para la categoria*</label>
+                  <input type="text" class="form-control descripcion_marca" name="descripcion_marca" placeholder="descripcion...">
+                </div>
+                <div class="col-12">
+                  <br>
+                </div>
+                <div class="upload_buttons_marca button-row justify-content-end d-flex">
+                  <div class="col-6">
+                    <button type="submit" formaction="marca_upload.php" class="btn btn_blue">Añadir</button>
+                  </div>
+                </div>                
+            </div>
+          </form>
+        </div>
+        <h2 id="marca_edit_del">Modificar marca</h2>  
+          <div class="row mb-2">
+            <div class="col-9"></div>
+            <div class="col-3">Buscar:</div>
+            <div class="col-9"></div>
+            <div class="col-3">
+              <input type="text" class="form-control marca_search_bar" name="marca_search_bar">
+            </div>
+          </div>
+          <div class="marca_list">
+            <table id="marca_list" class="table table-striped table-hover marca_table">
+            </table>
+            <div class="button-row justify-content-end d-flex mb-4" id="btn_back_next_marca">
+             
+            </div>
+          </div>
         </div>
         </div>
       </div>
@@ -230,6 +275,11 @@
     var arrow_catCateegoria = document.getElementById("arrow_catCategoria");
     var add_catPos = document.getElementById("add_catPos");
     var list_catPos = document.getElementById("list_catPos");
+    //########### MARCA ##############
+    var show_marcaCategoria = document.getElementById("show_marcaCategoria");
+    var arrow_marcaCateegoria = document.getElementById("arrow_marcaCategoria");
+    var add_marcaPos = document.getElementById("add_marcaPos");
+    var list_marcaPos = document.getElementById("list_marcaPos");
 
     show_prodCategoria.addEventListener('click', function(){
       arrow_prodCateegoria.classList.toggle("fa-caret-right");
@@ -250,6 +300,13 @@
       arrow_catCateegoria.classList.toggle("fa-caret-down");
       add_catPos.classList.toggle("show")
       list_catPos.classList.toggle("show")
+    });
+
+    show_marcaCategoria.addEventListener('click', function(){
+      arrow_marcaCateegoria.classList.toggle("fa-caret-right");
+      arrow_marcaCateegoria.classList.toggle("fa-caret-down");
+      add_marcaPos.classList.toggle("show")
+      list_marcaPos.classList.toggle("show")
     });
 
     function topFunction() {
@@ -330,6 +387,31 @@
                   }
                 }
                 window.scroll(0,findPos(document.getElementById("cat_edit_del")));
+    });
+
+    add_marcaPos.addEventListener('click', function(){
+      function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("marca_upl_edit")));
+    });
+    list_marcaPos.addEventListener('click', function(){
+      function findPos(obj) {
+                  var curtop = 0;
+                  if (obj.offsetParent) {
+                      do {
+                          curtop += obj.offsetTop;
+                      } while (obj = obj.offsetParent);
+                  return [curtop];
+                  }
+                }
+                window.scroll(0,findPos(document.getElementById("marca_edit_del")));
     });
   </script>
   <script type="text/javascript" src="js/admin.js"></script>
