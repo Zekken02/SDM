@@ -103,8 +103,6 @@ nav .logo h1{
   height: 100%;
   background: #ABAAAA;
   text-align: center;
-  position: sticky!important;
-  top: 40px;
 }
 .filtros input[type="radio"]{
   display: none;
